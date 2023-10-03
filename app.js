@@ -9,3 +9,13 @@ if (guess === secretNumber) {
 } else {
     alert("Lower")
 }
+
+while (guess !== secretNumber) {
+    if (guess < secretNumber) {
+        guess = Number(prompt("Try again, this time guess a HIGHER number!"))
+    }
+    else if (guess > secretNumber) {
+        guess = Number(prompt("Try again, this time guess a LOWER number!"))
+    }
+}
+alert("correct!")
