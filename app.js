@@ -1,3 +1,4 @@
+let scores = {};
 let playAgain;
 do {
   let secretNumber = Math.floor(Math.random() * 100) + 1;
@@ -13,8 +14,31 @@ do {
       guess = Number(prompt(`Sorry ${name}, guess LOWER!`));
     }
   }
-  alert(
-    `That's correct ${name}! Your previous guesses were ` + tries.join(", ")
-  );
-  playAgain = String(prompt("Would you like to play again?"))
-} while (playAgain === "yes");
+  if (name in scores) {
+    if (tries.length < scores[name]) {
+      alert(
+        `That’s Correct ${name}! And you beat your previous attempt by ${
+          scores[name] - tries.length
+        } fewer guesses!`
+      );
+      scores[name] = tries.length;
+    } else if (tries.length > scores[name]) {
+      alert(
+        `That’s Correct ${name}! You did better in your last game by ${
+          tries.length - scores[name]
+        } more guesses.`
+      );
+    } else {
+      alert(
+        `That's correct ${name}! Your previous guesses were ` + tries.join(", ")
+      );
+    }
+  } else {
+    scores[name] = tries.length;
+    alert(
+      `That's correct ${name}! Your previous guesses were ` + tries.join(", ")
+    );
+  }
+
+  playAgain = String(prompt("Would you like to play again?"));
+} while (playAgain.toLowerCase() === "yes");
